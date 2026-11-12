@@ -56,7 +56,6 @@ body {
 .home p {
     margin-top: 12px;
     font-size: 13px;
-    color: #806D70;
 }
 
 .shop-button {
@@ -68,15 +67,9 @@ body {
     border-radius: 30px;
     font-size: 13px;
     letter-spacing: 2px;
-    transition: 0.3s;
 }
 
-.shop-button:hover {
-    background: #B87583;
-    transform: translateY(-3px);
-}
-
-/* FLOATING DECORATIONS */
+/* DECORATIONS */
 
 .decor {
     position: absolute;
@@ -85,33 +78,14 @@ body {
     animation: float 4s ease-in-out infinite;
 }
 
-.decor.one {
-    top: 15%;
-    left: 12%;
-}
-
-.decor.two {
-    top: 25%;
-    right: 12%;
-}
-
-.decor.three {
-    bottom: 20%;
-    left: 18%;
-}
-
-.decor.four {
-    bottom: 15%;
-    right: 17%;
-}
+.one { top: 15%; left: 12%; }
+.two { top: 25%; right: 12%; }
+.three { bottom: 20%; left: 18%; }
+.four { bottom: 15%; right: 17%; }
 
 @keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-12px);
-    }
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
 }
 
 /* NAVIGATION */
@@ -135,7 +109,7 @@ nav a {
     font-size: 13px;
 }
 
-/* SHOP SECTION */
+/* SHOP */
 
 section {
     padding: 65px 20px;
@@ -168,11 +142,7 @@ section {
     border-radius: 16px;
     padding: 12px;
     box-shadow: 0 4px 15px #eadde0;
-    transition: 0.3s;
-}
-
-.product-card:hover {
-    transform: translateY(-5px);
+    cursor: pointer;
 }
 
 .product-card img {
@@ -180,33 +150,76 @@ section {
     aspect-ratio: 1 / 1;
     object-fit: cover;
     border-radius: 12px;
-    background: #F5E6E9;
 }
 
 .product-card h3 {
     font-family: 'Playfair Display', serif;
     font-size: 17px;
     margin-top: 12px;
-    color: #65474E;
 }
 
 .price {
     color: #B87583;
     font-weight: 600;
-    margin: 8px 0 13px;
+    margin: 8px 0;
+}
+
+/* PRODUCT DETAIL VIEW */
+
+.product-view {
+    display: none;
+    position: fixed;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    background: #FFF8F8;
+    z-index: 999;
+    overflow-y: auto;
+    padding: 25px;
+    text-align: center;
+}
+
+.product-view img {
+    width: 100%;
+    max-width: 450px;
+    max-height: 60vh;
+    object-fit: contain;
+    border-radius: 15px;
+    margin-top: 45px;
+}
+
+.product-view h2 {
+    font-family: 'Playfair Display', serif;
+    margin-top: 20px;
+    color: #65474E;
+}
+
+.product-view h3 {
+    color: #B87583;
+    margin: 12px;
+}
+
+.close {
+    position: absolute;
+    top: 12px;
+    right: 25px;
+    font-size: 38px;
+    cursor: pointer;
+    color: #79545D;
 }
 
 .order-button {
     display: inline-block;
     background: #CE8998;
     color: white;
-    padding: 9px 20px;
+    padding: 12px 28px;
     border-radius: 25px;
     text-decoration: none;
-    font-size: 12px;
+    font-size: 13px;
+    margin-top: 15px;
 }
 
-/* INFORMATION SECTIONS */
+/* INFORMATION */
 
 .info-box {
     background: #F8EBEE;
@@ -254,6 +267,8 @@ footer {
     color: #79545D;
 }
 
+/* RESPONSIVE */
+
 @media (min-width: 700px) {
     .products {
         grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -287,7 +302,6 @@ footer {
 
 </div>
 
-
 <!-- NAVIGATION -->
 
 <nav>
@@ -296,7 +310,6 @@ footer {
     <a href="#about">About</a>
     <a href="#contact">Contact</a>
 </nav>
-
 
 <!-- SHOP SECTION -->
 
@@ -310,34 +323,47 @@ footer {
 
     <div class="products">
 
-        <!-- PRODUCT TEMPLATE
-        Replace the image, name and price below.
-        Copy this entire product-card section for each new product.
-        -->
+        <!-- PRODUCT 1 -->
 
-        <div class="product-card">
+        <div class="product-card"
+             onclick="openProduct('IMG_9396.jpeg',
+             'Your Product Name', '₹Your Price')">
 
-            <img src="IMG_9396.jpeg"
-                 alt="crochet prayer mat keychain">
+            <img src="IMG_9396.jpeg" alt="Crochet Product">
 
-            <h3>crochet prayer mat keychain</h3>
+            <h3>Your Product Name</h3>
 
-            <div class="price">₹ 45 </div>
-
-            <a href="https://ig.me/m/art.by_asrin"
-               class="order-button"
-               target="_blank">
-               ORDER NOW
-            </a>
+            <div class="price">₹Your Price</div>
 
         </div>
+
+        <!-- COPY THIS BLOCK FOR MORE PRODUCTS -->
 
     </div>
 
 </section>
 
+<!-- PRODUCT DETAIL VIEW -->
 
-<!-- ABOUT SECTION -->
+<div id="productView" class="product-view">
+
+    <span onclick="closeProduct()" class="close">&times;</span>
+
+    <img id="detailImage" src="" alt="Selected crochet product">
+
+    <h2 id="detailName"></h2>
+
+    <h3 id="detailPrice"></h3>
+
+    <a href="https://ig.me/m/art.by_asrin"
+       class="order-button"
+       target="_blank">
+       ORDER NOW
+    </a>
+
+</div>
+
+<!-- ABOUT -->
 
 <section id="about">
 
@@ -356,7 +382,6 @@ footer {
 
 </section>
 
-
 <!-- CUSTOM ORDERS AND DELIVERY -->
 
 <section>
@@ -368,7 +393,6 @@ footer {
         <p>
             🌷 Custom orders are welcome!
             <br>
-
             📦 Delivery available in Pondicherry and
             selected nearby locations.
             Courier options may be available for other
@@ -379,8 +403,7 @@ footer {
 
 </section>
 
-
-<!-- CONTACT SECTION -->
+<!-- CONTACT -->
 
 <section id="contact">
 
@@ -409,7 +432,6 @@ footer {
 
 </section>
 
-
 <!-- FOOTER -->
 
 <footer>
@@ -419,6 +441,30 @@ footer {
     <p>Little Creations, Made with Love.</p>
 
 </footer>
+
+<!-- PRODUCT INTERACTION -->
+
+<script>
+
+function openProduct(image, name, price) {
+
+    document.getElementById("detailImage").src = image;
+
+    document.getElementById("detailName").innerText = name;
+
+    document.getElementById("detailPrice").innerText = price;
+
+    document.getElementById("productView").style.display = "block";
+
+}
+
+function closeProduct() {
+
+    document.getElementById("productView").style.display = "none";
+
+}
+
+</script>
 
 </body>
 </html>
